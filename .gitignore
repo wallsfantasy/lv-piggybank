@@ -12,4 +12,6 @@ npm-debug.log
 yarn-error.log
 .env
 .phpunit.result.cache
-ubuntu*.log
+/ubuntu*.log
+/_ide_helper.php
+/.phpstorm.meta.php
