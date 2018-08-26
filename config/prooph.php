@@ -28,6 +28,7 @@ return [
             'router' => [
                 'routes' => [
                     // list of commands with corresponding command handler
+                    \App\Modules\User\Command\RegisterUserCommand::NAME => \App\Modules\User\Command\RegisterUserHandler::class,
                 ],
             ],
         ],
@@ -38,6 +39,9 @@ return [
             'router' => [
                 'routes' => [
                     // list of events with a list of projectors
+                    \App\Modules\User\Event\UserRegisteredEvent::class => [
+                        \Prooph\ProophessorDo\Projection\User\UserProjector::class
+                    ]
                 ],
             ],
         ],

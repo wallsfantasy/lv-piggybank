@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +11,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::post('/user/register', 'App\Module\User\Application\RegisterUserHttp@RegisterUser')
+//    ->middleware('auth:api');
+
+Route::group(['namespace' => 'User'], function () {
+    Route::post('/user/register', 'RegisterUserHttp')
+        ->name('user.register');
 });
