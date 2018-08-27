@@ -4,14 +4,14 @@ declare(strict_types=1);
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Modules\User\Command\RegisterUserCommand;
+use App\Modules\User\Command\RegisterEmployeeCommand;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Prooph\Common\Messaging\FQCNMessageFactory;
 use Prooph\EventStore\Exception\ConcurrencyException;
 use Prooph\ServiceBus\CommandBus;
 
-final class RegisterUserController extends Controller
+final class RegisterEmployeeController extends Controller
 {
     /** @var FQCNMessageFactory */
     private $messageFactory;
@@ -26,7 +26,7 @@ final class RegisterUserController extends Controller
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Create a new employee instance after a valid registration.
      *
      * @param  Request $request
      */
@@ -35,9 +35,9 @@ final class RegisterUserController extends Controller
         $payload = \json_decode($request->getContent(), true);
 
         $command = $this->messageFactory->createMessageFromArray(
-            RegisterUserCommand::class,
+            RegisterEmployeeCommand::class,
             [
-                'message_name' => RegisterUserCommand::NAME,
+                'message_name' => RegisterEmployeeCommand::NAME,
                 'uuid' => null, // handle by factory
                 'created_at' => \DateTimeImmutable::createFromMutable(Carbon::now()),
                 'metadata' => null, // add nothing yet,

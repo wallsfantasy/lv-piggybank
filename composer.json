@@ -9,6 +9,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
+        "prooph/event-sourcing": "^5.6",
+        "prooph/event-store-bus-bridge": "^3.3",
         "wallsfantasy/event-store-laravel-package": "^1.0",
         "wallsfantasy/service-bus-laravel-package": "^1.0"
     },

@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace App\Modules\User;
 
+use App\Modules\User\Event\EmployeeRegisteredEvent;
 use App\Modules\User\Event\UserRegisteredEvent;
 use Prooph\EventSourcing\AggregateChanged;
 use Prooph\EventSourcing\AggregateRoot;
 
-class User extends AggregateRoot
+class Employee extends AggregateRoot
 {
     /** @var string */
     private $id;
@@ -18,18 +19,11 @@ class User extends AggregateRoot
     /** @var string */
     private $email;
 
-    /**
-     * @param string $id    Uuid
-     * @param string $name  User name
-     * @param string $email User email
-     *
-     * @return User
-     */
     public static function register(string $id, string $name, string $email): self
     {
         $instance = new self();
 
-        $instance->recordThat(UserRegisteredEvent::withData($id, $name, $email));
+        $instance->recordThat(EmployeeRegisteredEvent::withData($id, $name, $email));
 
         return $instance;
     }
@@ -54,7 +48,7 @@ class User extends AggregateRoot
         $this->{$handler}($e);
     }
 
-    protected function whenUserRegisteredEvent(UserRegisteredEvent $event): void
+    protected function whenEmployeeRegisteredEvent(EmployeeRegisteredEvent $event): void
     {
         $payload = $event->payload();
 

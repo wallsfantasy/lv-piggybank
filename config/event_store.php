@@ -45,14 +45,17 @@ return [
     'stores' => [
         'default' => 'mysql',
         'mysql' => [
-            'persistence_strategy' => \Prooph\EventStore\Pdo\PersistenceStrategy\MySqlAggregateStreamStrategy::class,
+            'persistence_strategy' => \Prooph\EventStore\Pdo\PersistenceStrategy\MySqlSingleStreamStrategy::class,
         ],
         'maria_db' => [
-            'persistence_strategy' => \Prooph\EventStore\Pdo\PersistenceStrategy\MariaDbAggregateStreamStrategy::class,
+            'persistence_strategy' => \Prooph\EventStore\Pdo\PersistenceStrategy\MariaDbSingleStreamStrategy::class,
         ],
         'postgres' => [
-            'persistence_strategy' => \Prooph\EventStore\Pdo\PersistenceStrategy\PostgresAggregateStreamStrategy::class,
+            'persistence_strategy' => \Prooph\EventStore\Pdo\PersistenceStrategy\PostgresSingleStreamStrategy::class,
         ],
+        'employee' => [
+            'persistence_strategy' => \Prooph\EventStore\Pdo\PersistenceStrategy\MySqlAggregateStreamStrategy::class,
+        ]
     ],
 
     /*
@@ -73,6 +76,20 @@ return [
     |
     */
     'repositories' => [
+        'user_stream' => [
+            'store' => 'default',
+            'repository_class' => \App\Modules\User\EventStore\UserEventStore::class,
+            'aggregate_type' => \App\Modules\User\User::class,
+//            'stream_name' => \App\Modules\User\EventStore\UserEventStore::STREAM_USER,
+//            'one_stream_per_aggregate' => true,
+        ],
+        'employee_stream' => [
+            'store' => 'mysql',
+            'repository_class' => \App\Modules\User\EventStore\EmployeeEventStore::class,
+            'aggregate_type' => \App\Modules\User\Employee::class,
+//            'stream_name' => \App\Modules\User\EventStore\EmployeeEventStore::STREAM_EMPLOYEE,
+//            'one_stream_per_aggregate' => true,
+        ],
     ],
 
     /*

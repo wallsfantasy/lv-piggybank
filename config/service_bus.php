@@ -33,7 +33,8 @@ return [
             'router' => [
                 'type' => \Prooph\ServiceBus\Plugin\Router\CommandRouter::class,
                 'routes' => [
-                    \App\Modules\User\Command\RegisterUserCommand::NAME => \App\Modules\User\Command\RegisterUserHandler::class
+                    \App\Modules\User\Command\RegisterUserCommand::NAME => \App\Modules\User\Command\RegisterUserHandler::class,
+                    \App\Modules\User\Command\RegisterEmployeeCommand::NAME => \App\Modules\User\Command\RegisterEmployeeHandler::class,
                 ],
             ],
         ],
@@ -65,12 +66,13 @@ return [
             'message_factory' => \Prooph\Common\Messaging\FQCNMessageFactory::class,
             'action_event_emitter' => \Prooph\Common\Event\ProophActionEventEmitter::class,
             'plugins' => [
-
+                \Prooph\ServiceBus\Plugin\InvokeStrategy\OnEventStrategy::class
             ],
             'router' => [
                 'type' => \Prooph\ServiceBus\Plugin\Router\EventRouter::class,
                 'routes' => [
-
+                    \App\Modules\User\Event\UserRegisteredEvent::class => \App\Modules\User\Event\UserRegisteredHandler::class,
+                    \App\Modules\User\Event\EmployeeRegisteredEvent::class => \App\Modules\User\Event\EmployeeRegisteredHandler::class,
                 ],
             ],
         ],

@@ -20,4 +20,6 @@
 Route::group(['namespace' => 'User'], function () {
     Route::post('/user/register', 'RegisterUserController')
         ->name('user.register');
+    Route::post('/user/employee-register', 'RegisterEmployeeController')
+        ->name('user.employee-register');
 });
