@@ -150,7 +150,6 @@ return [
         /*
          * Package Service Providers...
          */
-        Prooph\Package\ProophServiceProvider::class,
 
         /*
          * Application Service Providers...
