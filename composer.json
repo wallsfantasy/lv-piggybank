@@ -9,6 +9,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
+        "wallsfantasy/event-store-laravel-package": "^1.0",
         "wallsfantasy/service-bus-laravel-package": "^1.0"
     },
     "require-dev": {
