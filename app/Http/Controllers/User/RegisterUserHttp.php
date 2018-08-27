@@ -44,6 +44,15 @@ final class RegisterUserHttp extends Controller
             ]
         );
 
-        $this->commandBus->dispatch($command);
+        try {
+            $this->commandBus->dispatch($command);
+        } catch (\Throwable $e) {
+            dd([
+                $e->getPrevious()->getMessage(),
+                $e->getPrevious()->getFile(),
+                $e->getPrevious()->getLine()
+            ]);
+        }
+
     }
 }

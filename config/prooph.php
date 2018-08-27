@@ -22,6 +22,17 @@ return [
             \Prooph\EventStoreBusBridge\TransactionManager::class,
         ],
         // list of aggregate repositories
+        'default' => [
+            'connection' => \Prooph\EventStore\Pdo\MySqlEventStore::class,
+            'persistence_strategy' => \Prooph\EventStore\Pdo\PersistenceStrategy\MySqlSingleStreamStrategy::class,
+            'event_store' => \Prooph\EventStore\Pdo\MySqlEventStore::class,
+            'repository_class' => \App\Modules\User\EventStore\UserEventStore::class,
+            'aggregate_type' => \App\Modules\User\User::class,
+            'aggregate_translator' => \Prooph\EventSourcing\EventStoreIntegration\AggregateTranslator::class,
+            //'snapshot_store' => \Prooph\EventStore\Snapshot\SnapshotStore::class,
+            'one_stream_per_aggregate' => false,
+            'stream_name' => 'user_stream',
+        ],
     ],
     'service_bus' => [
         'command_bus' => [
@@ -40,7 +51,7 @@ return [
                 'routes' => [
                     // list of events with a list of projectors
                     \App\Modules\User\Event\UserRegisteredEvent::class => [
-                        \Prooph\ProophessorDo\Projection\User\UserProjector::class
+                        \App\Modules\User\Projection\UserProjection::class
                     ]
                 ],
             ],
